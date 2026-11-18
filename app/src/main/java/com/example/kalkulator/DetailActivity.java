@@ -68,8 +68,8 @@ public class DetailActivity extends AppCompatActivity {
 
         tvCategory.setText(category);
         tvTimestamp.setText(fullDateFormat.format(new Date(timestamp)));
-        tvExpression.setText(expression);
-        tvResult.setText(result);
+        tvExpression.setText(CalculatorEngine.formatExpressionForDisplay(expression));
+        tvResult.setText(CalculatorEngine.formatNumberString(result));
 
         MaterialButton btnBack = findViewById(R.id.btnBack);
         MaterialButton btnDelete = findViewById(R.id.btnDelete);

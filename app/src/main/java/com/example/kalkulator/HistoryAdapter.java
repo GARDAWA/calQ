@@ -56,8 +56,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         HistoryItem item = items.get(position);
         holder.tvCategory.setText(item.getCategory());
         holder.tvTimestamp.setText(dateFormat.format(new Date(item.getTimestamp())));
-        holder.tvExpression.setText(item.getExpression());
-        holder.tvResult.setText("= " + item.getResult());
+        holder.tvExpression.setText(CalculatorEngine.formatExpressionForDisplay(item.getExpression()));
+        holder.tvResult.setText("= " + CalculatorEngine.formatNumberString(item.getResult()));
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {

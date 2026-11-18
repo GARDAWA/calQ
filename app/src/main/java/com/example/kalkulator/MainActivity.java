@@ -167,24 +167,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void appendDot() {
         if (justEvaluated) {
-            expression = "0.";
+            expression = "0,";
             lastCommittedResult = "";
             justEvaluated = false;
             updateDisplay();
             return;
         }
         if (endsWithOperator(expression)) {
-            expression += "0.";
+            expression += "0,";
             updateDisplay();
             return;
         }
         if (expression.endsWith("%")) {
-            expression += "×0.";
+            expression += "×0,";
             updateDisplay();
             return;
         }
-        if (!currentNumberHasDot()) {
-            expression += ".";
+        if (!currentNumberHasComma()) {
+            expression += ",";
             updateDisplay();
         }
     }
@@ -288,12 +288,13 @@ public class MainActivity extends AppCompatActivity {
 
         lastCommittedResult = res.formattedResult;
         justEvaluated = true;
+        tvExpression.setText(CalculatorEngine.formatExpressionForDisplay(evalTarget));
         tvResult.setTextColor(getColor(R.color.accent_orange));
         tvResult.setText(res.formattedResult);
 
         if (containsOperation(evalTarget)) {
             historyRepository.add(new HistoryItem(
-                    evalTarget,
+                    CalculatorEngine.formatExpressionForDisplay(evalTarget),
                     res.formattedResult,
                     HistoryItem.CATEGORY_CALCULATOR
             ));
@@ -302,6 +303,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void insertExternalValue(String value) {
         String sanitized = value.trim();
+        if (sanitized.startsWith("=")) {
+            sanitized = sanitized.substring(1).trim();
+        }
         if (justEvaluated || "0".equals(expression)) {
             expression = sanitized;
         } else if (endsWithOperator(expression)) {
@@ -315,26 +319,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateDisplay() {
-        tvExpression.setText(expression);
-        scrollExpression.post(() -> scrollExpression.fullScroll(HorizontalScrollView.FOCUS_RIGHT));
-
         if (justEvaluated && !lastCommittedResult.isEmpty()) {
+            tvExpression.setText(CalculatorEngine.formatExpressionForDisplay(expression));
+            scrollExpression.post(() -> scrollExpression.fullScroll(HorizontalScrollView.FOCUS_RIGHT));
             tvResult.setTextColor(getColor(R.color.accent_orange));
             tvResult.setText(lastCommittedResult);
             return;
         }
 
         String previewTarget = trimTrailingOperator(expression);
-        if (containsOperation(previewTarget)) {
-            CalculatorEngine.EvaluationResult preview = CalculatorEngine.evaluate(previewTarget);
-            if (preview.success) {
-                tvResult.setTextColor(getColor(R.color.text_secondary));
-                tvResult.setText("= " + preview.formattedResult);
+        boolean hasOp = containsOperation(previewTarget) || endsWithOperator(expression);
+
+        if (hasOp) {
+            tvExpression.setText(CalculatorEngine.formatExpressionForDisplay(expression));
+            scrollExpression.post(() -> scrollExpression.fullScroll(HorizontalScrollView.FOCUS_RIGHT));
+
+            if (containsOperation(previewTarget)) {
+                CalculatorEngine.EvaluationResult preview = CalculatorEngine.evaluate(previewTarget);
+                if (preview.success) {
+                    tvResult.setTextColor(getColor(R.color.text_secondary));
+                    tvResult.setText("= " + preview.formattedResult);
+                } else {
+                    tvResult.setText("");
+                }
             } else {
-                tvResult.setText("");
+                CalculatorEngine.EvaluationResult preview = CalculatorEngine.evaluate(previewTarget);
+                if (preview.success) {
+                    tvResult.setTextColor(getColor(R.color.text_secondary));
+                    tvResult.setText(preview.formattedResult);
+                } else {
+                    tvResult.setText("");
+                }
             }
         } else {
-            tvResult.setText("");
+            tvExpression.setText("");
+            tvResult.setTextColor(getColor(R.color.text_primary));
+            tvResult.setText(CalculatorEngine.formatExpressionForDisplay(expression));
         }
     }
 
@@ -367,10 +387,10 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    private boolean currentNumberHasDot() {
+    private boolean currentNumberHasComma() {
         for (int i = expression.length() - 1; i >= 0; i--) {
             char c = expression.charAt(i);
-            if (c == '.') {
+            if (c == ',' || c == '.') {
                 return true;
             }
             if (c == '+' || c == '−' || c == '-' || c == '×' || c == '÷' || c == '%') {

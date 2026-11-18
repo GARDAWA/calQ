@@ -19,6 +19,15 @@ public class CalculatorEngineTest {
     }
 
     @Test
+    public void thousandsGrouping_formatsWithDot() {
+        assertEquals("1.000", CalculatorEngine.evaluate("1000").formattedResult);
+        assertEquals("3.000", CalculatorEngine.evaluate("1.000 + 2.000").formattedResult);
+        assertEquals("1.000.000", CalculatorEngine.evaluate("1000 × 1000").formattedResult);
+        assertEquals("1.000 + 500", CalculatorEngine.formatExpressionForDisplay("1000+500"));
+        assertEquals("531,6666666667", CalculatorEngine.formatNumberString("531.6666666667"));
+    }
+
+    @Test
     public void operatorPrecedence_isRespected() {
         assertEquals("14", CalculatorEngine.evaluate("2 + 3 × 4").formattedResult);
         assertEquals("20", CalculatorEngine.evaluate("(2 + 3) × 4").formattedResult);
@@ -26,14 +35,15 @@ public class CalculatorEngineTest {
 
     @Test
     public void decimalPrecision_avoidsFloatingPointErrors() {
-        assertEquals("0.3", CalculatorEngine.evaluate("0.1 + 0.2").formattedResult);
-        assertEquals("2.5", CalculatorEngine.evaluate("5 ÷ 2").formattedResult);
+        assertEquals("0,3", CalculatorEngine.evaluate("0.1 + 0.2").formattedResult);
+        assertEquals("2,5", CalculatorEngine.evaluate("5 ÷ 2").formattedResult);
+        assertEquals("3,5", CalculatorEngine.evaluate("1,5 + 2").formattedResult);
     }
 
     @Test
     public void percentageAndNegativeNumbers_workCorrectly() {
         assertEquals("20", CalculatorEngine.evaluate("200 × 10%").formattedResult);
-        assertEquals("0.5", CalculatorEngine.evaluate("50%").formattedResult);
+        assertEquals("0,5", CalculatorEngine.evaluate("50%").formattedResult);
         assertEquals("3", CalculatorEngine.evaluate("-5 + 8").formattedResult);
         assertEquals("-20", CalculatorEngine.evaluate("10 × -2").formattedResult);
     }
@@ -53,8 +63,8 @@ public class CalculatorEngineTest {
 
         CalculatorEngine.DiscountResult disc = CalculatorEngine.calculateDiscount(
                 new BigDecimal("100000"), new BigDecimal("20"));
-        assertEquals("20000", CalculatorEngine.formatNumber(disc.savings));
-        assertEquals("80000", CalculatorEngine.formatNumber(disc.finalPrice));
+        assertEquals("20.000", CalculatorEngine.formatNumber(disc.savings));
+        assertEquals("80.000", CalculatorEngine.formatNumber(disc.finalPrice));
 
         BigDecimal f = CalculatorEngine.celsiusToFahrenheit(new BigDecimal("100"));
         assertEquals("212", CalculatorEngine.formatNumber(f));
