@@ -1,3 +1,48 @@
 <resources>
-    <string name="app_name">kalkulator</string>
+    <string name="app_name">CALQ</string>
+    <string name="app_tagline">Contextual Calculator</string>
+    <string name="title_history">Riwayat Perhitungan</string>
+    <string name="title_detail">Detail Perhitungan</string>
+    <string name="title_quick_tools">Quick Tools</string>
+    <string name="clear_history">Hapus Semua</string>
+    <string name="history_empty">Belum ada riwayat</string>
+    <string name="history_empty_desc">Perhitungan yang Anda lakukan akan tersimpan di sini secara otomatis.</string>
+    <string name="use_in_calculator">Gunakan di Kalkulator</string>
+    <string name="copy_result">Salin Hasil</string>
+    <string name="copy_expression">Salin Ekspresi</string>
+    <string name="copied_to_clipboard">Tersalin ke clipboard</string>
+    <string name="confirm_clear_history_title">Hapus Riwayat?</string>
+    <string name="confirm_clear_history_msg">Seluruh riwayat perhitungan akan dihapus permanen.</string>
+    <string name="confirm_delete_item_title">Hapus Perhitungan?</string>
+    <string name="confirm_delete_item_msg">Item riwayat ini akan dihapus permanen.</string>
+    <string name="action_cancel">Batal</string>
+    <string name="action_delete">Hapus</string>
+    <string name="action_clear">Clear</string>
+    
+    <!-- Quick Tools strings -->
+    <string name="tool_percentage">Persentase</string>
+    <string name="tool_discount">Diskon</string>
+    <string name="tool_temperature">Suhu</string>
+    <string name="calc_percentage_title">Hitung X% dari Y</string>
+    <string name="calc_discount_title">Hitung Diskon Harga</string>
+    <string name="calc_temperature_title">Konversi Suhu (°C ↔ °F)</string>
+    <string name="label_expression">Ekspresi</string>
+    <string name="label_result">Hasil</string>
+    <string name="label_time">Waktu</string>
+    <string name="label_category">Kategori</string>
+    <string name="action_use">Gunakan</string>
+    <string name="hint_percent">Persentase (%)</string>
+    <string name="hint_base_value">Nilai Awal</string>
+    <string name="hint_original_price">Harga Awal</string>
+    <string name="hint_discount_percent">Diskon (%)</string>
+    <string name="hint_temperature_value">Nilai Suhu</string>
+    <string name="label_savings">Hemat</string>
+    <string name="label_final_price">Harga Setelah Diskon</string>
+    <string name="temp_c_to_f">°C → °F</string>
+    <string name="temp_f_to_c">°F → °C</string>
+    <string name="cd_history">Riwayat Perhitungan</string>
+    <string name="cd_quick_tools">Quick Tools</string>
+    <string name="cd_back">Kembali</string>
+    <string name="cd_clear_all">Hapus Semua Riwayat</string>
+    <string name="cd_backspace">Hapus Karakter</string>
 </resources>
