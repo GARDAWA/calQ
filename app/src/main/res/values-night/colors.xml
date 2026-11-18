@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- CALQ Brand Palette (Dark Mode - Initial Theme) -->
+    <color name="bg_graphite">#17191D</color>
+    <color name="surface_dark">#24272D</color>
+    <color name="surface_card">#202329</color>
+    <color name="surface_button_number">#2B2F38</color>
+    <color name="surface_button_function">#363B46</color>
+    <color name="accent_orange">#FF9B54</color>
+    <color name="accent_orange_pressed">#E5833B</color>
+    <color name="accent_orange_light">#33FF9B54</color>
+    <color name="color_on_primary">#17191D</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#F8F9FA</color>
+    <color name="text_secondary">#9DA2AE</color>
+    <color name="text_muted">#686D7A</color>
+    
+    <!-- Utility Colors -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="red_error">#FF6B6B</color>
+    <color name="green_success">#51CF66</color>
+    <color name="divider_color">#2C303A</color>
+</resources>

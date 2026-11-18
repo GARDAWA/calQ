@@ -123,14 +123,14 @@ public class QuickToolsBottomSheet extends BottomSheetDialogFragment {
         etPrimary.setText("");
         etSecondary.setText("");
 
-        int orange = requireContext().getColor(R.color.accent_orange);
+        int accentColor = requireContext().getColor(R.color.accent_orange);
         int divider = requireContext().getColor(R.color.divider_color);
         chipPercentage.setChipStrokeColor(ColorStateList.valueOf(
-                mode == ToolMode.PERCENTAGE ? orange : divider));
+                mode == ToolMode.PERCENTAGE ? accentColor : divider));
         chipDiscount.setChipStrokeColor(ColorStateList.valueOf(
-                mode == ToolMode.DISCOUNT ? orange : divider));
+                mode == ToolMode.DISCOUNT ? accentColor : divider));
         chipTemperature.setChipStrokeColor(ColorStateList.valueOf(
-                mode == ToolMode.TEMPERATURE ? orange : divider));
+                mode == ToolMode.TEMPERATURE ? accentColor : divider));
 
         if (mode == ToolMode.PERCENTAGE) {
             tilPrimary.setHint(getString(R.string.hint_percent));

@@ -174,7 +174,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/use_in_calculator"
                 android:textAllCaps="false"
-                android:textColor="@color/bg_graphite"
+                android:textColor="@color/color_on_primary"
                 android:textSize="16sp"
                 app:backgroundTint="@color/accent_orange"
                 app:cornerRadius="16dp" />
